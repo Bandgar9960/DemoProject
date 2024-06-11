@@ -25,10 +25,20 @@ public class UserServiceImpl implements UserServiceI {
 
         return savedUser;
     }
-
+    //4 th  Dnyaneshwar, 28 , Latur
+    //      Shivaji  27  Pune
     @Override
     public User updateUser(User user, Long userId) {
-        return null;
+
+        User user1 = userRepository.findById(userId).get();
+
+        user1.setUserName(user.getUserName());
+        user1.setUserAge(user.getUserAge());
+        user1.setAbout(user.getAbout());
+
+        User updatedUser = userRepository.save(user1);
+
+        return updatedUser;
     }
 
     @Override
