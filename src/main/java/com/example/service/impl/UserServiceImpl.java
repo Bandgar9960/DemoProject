@@ -10,29 +10,20 @@ import java.util.List;
 public class UserServiceImpl implements UserServiceI {
 
 
+    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-    public UserRepository getUserRepository() {
-        return userRepository;
-    }
-
-    @Autowired
-    public void setUserRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-    // IOC - spring bean life cycle, DI injection
+   // IOC - spring bean life cycle, DI injection
 
     //DI - dependency Injection - setter, constructor, feild dependency injection
 
 
     @Override
     public User createUser(User user) {
-        return null;
+
+        User savedUser = userRepository.save(user);
+
+        return savedUser;
     }
 
     @Override
