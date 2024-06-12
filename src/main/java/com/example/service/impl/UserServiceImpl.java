@@ -6,6 +6,7 @@ import com.example.service.UserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
 public class UserServiceImpl implements UserServiceI {
 
@@ -40,19 +41,42 @@ public class UserServiceImpl implements UserServiceI {
 
         return updatedUser;
     }
-
+    //4th Dnyaneshwar 28 I am software Dev.
     @Override
     public User getSingleUser(Long userId) {
-        return null;
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Resource not found on server!!" + userId));
+
+        return user;
+
     }
+
+      /*  Optional<User> user = userRepository.findById(userId);
+
+        if (user.isPresent()) {
+            return user.get();
+        } else {
+            throw new NullPointerException("Resource not found on server!!" + userId);
+        }
+
+
+    }*/
 
     @Override
     public List<User> getAllUsers() {
-        return null;
-    }
 
+        List<User> allUsers = userRepository.findAll();
+
+        return allUsers;
+    }
+    //4th Dnyaneshwar 28 I am software Dev.
     @Override
     public void deleteUser(Long userId) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Resource not found on server!!" + userId));
+        userRepository.delete(user);
 
     }
 }
